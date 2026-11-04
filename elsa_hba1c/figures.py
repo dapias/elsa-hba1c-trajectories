@@ -100,7 +100,7 @@ def figure2_tau_profile(FITS, extra, CENS, prof_c):
         rows.append(dict(data=k, tau=best[k], tau_lo=lo, tau_hi=hi))
         ax.plot(p["tau"], p["lr_drop"], marker=mk, color=col, lw=1.6, ms=4,
                 label=f"{lab}: τ = {best[k]:.1f} y ({lo:.1f}–{hi:.1f})".replace(f"{best[k]:.1f} y", f"{best[k]:.1f} y" if best[k] < 10 else f"{best[k]:.0f} y"))
-    ax.axhline(1.92, color=INK2, lw=0.9, ls="--"); ax.text(0.55, 2.2, "95% interval", color=INK2, fontsize=8)
+    ax.axhline(1.92, color=INK2, lw=0.9, ls="--"); ax.text(2.1, 2.2, "95% interval", color=INK2, fontsize=8)
     ax.set(xscale="log", xlabel="drift time constant τ (years)", ylabel="log-likelihood below the best", ylim=(-0.3, 15))
     ax.set_xlim(2, 120)
     ax.set_xticks([2, 5, 10, 20, 50, 100]); ax.set_xticklabels(["2", "5", "10", "20", "50", "100"])
