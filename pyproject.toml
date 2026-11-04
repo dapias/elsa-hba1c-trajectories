@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "elsa-hba1c"
+version = "1.0.0"
+description = "Personal HbA1c trajectories and incident diabetes in the English Longitudinal Study of Ageing"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Diego Tapias" }, { name = "Cédric Donati" }, { name = "Susanne Völter-Mahlknecht" }]
+dependencies = ["numpy", "pandas", "scipy", "statsmodels", "patsy", "scikit-learn", "matplotlib"]
+
+[project.optional-dependencies]
+transformer = ["torch"]
+
+[tool.setuptools]
+packages = ["elsa_hba1c"]

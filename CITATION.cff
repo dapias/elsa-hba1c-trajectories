@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the paper."
+title: "elsa-hba1c-trajectories: analysis code"
+authors:
+  - family-names: Tapias
+    given-names: Diego
+    affiliation: "Institut für Arbeits-, Sozial- und Präventivmedizin, Universitätsmedizin Göttingen"
+  - family-names: Donati
+    given-names: Cédric
+    affiliation: "Institut für Arbeits-, Sozial- und Präventivmedizin, Universitätsmedizin Göttingen"
+  - family-names: Völter-Mahlknecht
+    given-names: Susanne
+    affiliation: "Institut für Arbeits-, Sozial- und Präventivmedizin, Universitätsmedizin Göttingen"
+license: MIT
+repository-code: "https://github.com/dapias/elsa-hba1c-trajectories"
+preferred-citation:
+  type: article
+  title: "Observability of personal HbA1c trajectories: longitudinal dynamics and incident diabetes in the English Longitudinal Study of Ageing"
+  authors:
+    - family-names: Tapias
+      given-names: Diego
+    - family-names: Donati
+      given-names: Cédric
+    - family-names: Völter-Mahlknecht
+      given-names: Susanne
+  year: 2026
