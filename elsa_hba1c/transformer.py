@@ -1,8 +1,8 @@
 """Time-aware Transformer (STraTS-style) as a contender to the personal-baseline models.
 
-Companion to elsa_hba1c_paper.py, which must have been run first: this script reads the cross-fitted features
-(features.pkl) and the health-visit file (nurse_long.pkl) it saved in --work, and reuses its folds, models
-B, D and E and its evaluation helpers. Requires PyTorch.
+Run scripts/01_prepare_data.py (or run_all.py) first: this module reads the cross-fitted features
+(features.pkl) and the health-visit file (nurse_long.pkl) saved in --work, and reuses the folds, models
+B, D and E and the evaluation helpers of the main analysis. Requires PyTorch.
 
 Reference architecture: Tipirneni & Reddy (2022), "Self-supervised Transformer for Sparse and
 Irregularly Sampled Multivariate Clinical Time-Series", ACM TKDD.
@@ -41,12 +41,12 @@ interrupted, start it again with the same options and finished folds are loaded 
 recomputed. Checkpoints made with different settings or an older CODE_VERSION are ignored;
 --fresh discards them.
 
-Usage (same --data, --work and --out as for elsa_hba1c_paper.py):
-        python elsa_hba1c_transformer.py --quick --folds 1 --tag smoke   (smoke test, a few minutes)
-        python elsa_hba1c_transformer.py                                 (main run, Table 3)
-        python elsa_hba1c_transformer.py --d-model 32 --tag d32          (robustness runs, Table S7)
-        python elsa_hba1c_transformer.py --d-model 128 --tag d128
-        python elsa_hba1c_transformer.py --layers 3 --tag l3
+Usage (same --data, --work and --out as for the other scripts):
+        python scripts/05_transformer.py --quick --folds 1 --tag smoke   (smoke test, a few minutes)
+        python scripts/05_transformer.py                                 (main run, Table 3)
+        python scripts/05_transformer.py --d-model 32 --tag d32          (robustness runs, Table S6)
+        python scripts/05_transformer.py --d-model 128 --tag d128
+        python scripts/05_transformer.py --layers 3 --tag l3
 Device: --device auto (default) uses an NVIDIA GPU if PyTorch sees one, otherwise the CPU.
 Threads: by default all CPU cores. When running several jobs at once on the CPU, give each
 a share, e.g. --threads 8 on a 32-core machine for four parallel runs. Parallel runs are safe:
@@ -65,9 +65,12 @@ import torch
 import torch.nn as nn
 from pathlib import Path
 
-import elsa_hba1c_paper as config          # settings, paths and helpers of the main analysis script
-from elsa_hba1c_paper import read_tab, clean_negative, decimal_date, oof_predict, fast_auc, cluster_boot, CLIN, MODELS
-from elsa_hba1c_paper import derive as prep, save as safe_write
+from . import config                       # settings and paths of the main analysis
+from .config import CLIN, MODELS
+from .data import clean_negative, decimal_date, read_tab
+from .features import derive as prep
+from .output import save as safe_write
+from .prediction import cluster_boot, fast_auc, oof_predict
 
 warnings.filterwarnings("ignore")
 
@@ -521,7 +524,3 @@ def main():
     print(pd.DataFrame(comp).round(3).to_string(index=False))
     print(pre[["fold", "mse_reduction_vs_last_all", "mse_reduction_vs_last_hba1c"]].round(3).to_string(index=False))
     print(f"  total time {time.time() - t0:.0f}s")
-
-
-if __name__ == "__main__":
-    main()
