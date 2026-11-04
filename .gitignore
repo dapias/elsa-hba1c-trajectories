@@ -1,0 +1,24 @@
+# ELSA data and person-level files: never commit
+*.tab
+*.dta
+*.sav
+*.pkl
+work_local/
+work_check/
+tab/
+data/
+strats_ckpt/
+
+# outputs (aggregate tables are produced by the scripts; not part of the repository)
+outputs/
+*.csv
+FIG_*
+figures/
+
+# Python and system
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.DS_Store
+.venv/
