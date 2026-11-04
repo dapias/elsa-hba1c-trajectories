@@ -116,7 +116,6 @@ The analyses were developed as a single script (first commit, `elsa_hba1c_paper.
 changing any function: `tools/verify_split.py` compares the abstract syntax tree of every function and setting in
 the package with the original script (`git show <first commit>:elsa_hba1c_paper.py > original.py`), and a full run
 of the package was compared with the output tables of the original run.
-<!-- TODO: confirm the comparison before the release -->
 
 ## Citation
 
