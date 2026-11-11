@@ -47,6 +47,7 @@ Usage (same --data, --work and --out as for the other scripts):
         python scripts/05_transformer.py --d-model 32 --tag d32          (robustness runs, Table S6)
         python scripts/05_transformer.py --d-model 128 --tag d128
         python scripts/05_transformer.py --layers 3 --tag l3
+        python scripts/05_transformer.py --horizon 4 --tag h4            (4-year pretraining window)
 Device: --device auto (default) uses an NVIDIA GPU if PyTorch sees one, otherwise the CPU.
 Threads: by default all CPU cores. When running several jobs at once on the CPU, give each
 a share, e.g. --threads 8 on a 32-core machine for four parallel runs. Parallel runs are safe:
@@ -372,6 +373,8 @@ def main():
     ap.add_argument("--d-model", type=int, default=None, help="model dimension (divisible by 4 heads)")
     ap.add_argument("--layers", type=int, default=None, help="number of Transformer encoder layers")
     ap.add_argument("--tag", default="", help="suffix for output files, e.g. d32 (keeps runs apart)")
+    ap.add_argument("--horizon", type=float, default=None,
+                    help="pretraining forecast window in years (default 2.5)")
     ap.add_argument("--folds", type=int, default=config.N_FOLDS, help="run only the first N folds (testing)")
     ap.add_argument("--fresh", action="store_true", help="ignore and delete existing fold checkpoints")
     a = ap.parse_args()
@@ -384,6 +387,7 @@ def main():
     if a.ft_epochs: HP["ft_epochs"] = a.ft_epochs
     if a.d_model: HP["d_model"] = a.d_model
     if a.layers: HP["n_layers"] = a.layers
+    if a.horizon: HP["forecast_horizon"] = a.horizon
     if HP["d_model"] % HP["n_heads"]:
         raise SystemExit(f"--d-model must be divisible by n_heads={HP['n_heads']}")
     sfx = f"_{a.tag}" if a.tag else ""
