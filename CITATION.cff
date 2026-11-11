@@ -1,15 +1,11 @@
 cff-version: 1.2.0
 message: "If you use this code, please cite the paper."
 title: "elsa-hba1c-trajectories: analysis code"
+version: 1.0.0
+date-released: 2026-11-11
 authors:
   - family-names: Tapias
     given-names: Diego
-    affiliation: "Institut für Arbeits-, Sozial- und Präventivmedizin, Universitätsmedizin Göttingen"
-  - family-names: Donati
-    given-names: Cédric
-    affiliation: "Institut für Arbeits-, Sozial- und Präventivmedizin, Universitätsmedizin Göttingen"
-  - family-names: Völter-Mahlknecht
-    given-names: Susanne
     affiliation: "Institut für Arbeits-, Sozial- und Präventivmedizin, Universitätsmedizin Göttingen"
 license: MIT
 repository-code: "https://github.com/dapias/elsa-hba1c-trajectories"
@@ -23,4 +19,5 @@ preferred-citation:
       given-names: Cédric
     - family-names: Völter-Mahlknecht
       given-names: Susanne
+  journal: medRxiv
   year: 2026
