@@ -1,9 +1,9 @@
-# TODO: pin the exact versions used for the paper (pip freeze)
-numpy
-pandas
-scipy
-statsmodels
-patsy
-scikit-learn
-matplotlib
-torch        # only for the Transformer (scripts/05_transformer.py)
+# Exact versions used for the analyses in the paper (Python 3.12.2)
+numpy==1.26.4
+pandas==2.2.3
+scipy==1.11.4
+statsmodels==0.14.5
+patsy==1.0.1
+scikit-learn==1.5.1
+matplotlib==3.9.2
+torch==2.2.2        # only for the Transformer (scripts/05_transformer.py)
