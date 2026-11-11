@@ -10,8 +10,10 @@ from .output import save
 
 
 def corr_slope(p, interval, length, rho=0.0, end_age=65):
-    """r = corr(estimated, underlying slope) for measurements every `interval` years over `length` years,
-    the last one at age 65; intercept-slope correlation rho (0 = reference scenario)."""
+    """r = corr(estimated, underlying slope) for measurements every `interval` years, starting at age
+    65 - `length`. The last measurement is at age 65 when `length` is a multiple of `interval`, otherwise
+    earlier (e.g. four-yearly over 30 years: ages 35, 39, ..., 63, a 28-year span).
+    Intercept-slope correlation rho (0 = reference scenario)."""
     t = np.arange(end_age - length, end_age + 1e-9, interval)
     Z = np.column_stack([np.ones_like(t), (t - AGE_CENTRE) / 10])
     c01 = rho * p["sd_level"] * p["sd_slope"]
