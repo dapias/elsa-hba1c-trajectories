@@ -3,7 +3,7 @@
 Analysis code for
 
 > Tapias D, Donati C, Völter-Mahlknecht S. *Observability of personal HbA1c trajectories: longitudinal dynamics and
-> incident diabetes in the English Longitudinal Study of Ageing.* Preprint, 2026.
+> incident diabetes in the English Longitudinal Study of Ageing.* medRxiv preprint, 2026 (DOI to follow).
 
 The code estimates personal HbA1c trajectories from repeated health-visit measurements in the English Longitudinal
 Study of Ageing (ELSA), evaluates their association with incident diabetes and their incremental predictive value
@@ -25,7 +25,8 @@ UK Data Service under an End User Licence (study SN 5050). Place the following `
 
 ## Installation
 
-Python 3.10 or later.
+Python 3.10 or later; the analyses in the paper were run with Python 3.12.2 and the package versions
+pinned in `requirements.txt`.
 
 ```
 pip install -r requirements.txt          # PyTorch is needed only for the Transformer (scripts/05_transformer.py)
@@ -44,14 +45,16 @@ python scripts/05_transformer.py --data ../tab --work ../work_local --out ../out
 ```
 
 `run_all.py` is the reference run (about 1–2 hours on a laptop the first time; the likelihood fits are cached in
-`--work` and reused). The same analyses can be run section by section:
+`--work` and reused). The Transformer robustness runs of Table S6 use `--d-model 32`, `--d-model 128` and `--layers 3`
+(see `scripts/05_transformer.py`); `--horizon` changes the pretraining window (default 2.5 years, as in the paper).
+The same analyses can be run section by section:
 
 | Script | Paper | Needs |
 |---|---|---|
 | `01_prepare_data.py` | Sections 2.1–2.3; Table 2 | ELSA files |
 | `02_prediction.py` | Section 2.4; Table 3, Tables S3–S4 | 01 |
 | `03_association.py` | Sections 2.5–2.6; Table 1, Figure 3, Tables S1–S2, S7–S9, Figure 4A | 01 |
-| `04_drift_observability.py` | Sections 2.8–2.9; Table 5, Figures 4B, 5, 6, S1–S4, Tables S10–S12 | 01, 03 |
+| `04_drift_observability.py` | Sections 2.8–2.9; Table 4, Figures 4B, 5, 6, S1–S4, Tables S10–S12 | 01, 03 |
 | `05_transformer.py` | Section 2.7; Table 3 (row T), Tables S5–S6 | 01 |
 | `06_figures.py` | redraws Figures 4–6, S3, S4 from saved outputs (seconds) | a full run |
 
@@ -77,7 +80,7 @@ to the published numbering is:
 | `S1_ipw_and_extended_set_diagnostics`, `S1_deaths_scenarios`, `S1_death_vs_slope`, `S1_hba1c_only_outcome`, `S1_multiple_imputation`, `S1_missingness` | Table S9, Section 3.3 |
 | `S1_slope_vs_drift_level`, `S1_slope_including_baseline_value` | Table S10, Figure 4B |
 | `S1_selftest_simulation` | Section 3.3, Supplementary Section S4 |
-| `T4_drift_models`, `T4_tau_intervals`, `T4_crossing_values`, `FIG_fig2_tau_profile` | Table 5, Figure 5 |
+| `T4_drift_models`, `T4_tau_intervals`, `T4_crossing_values`, `FIG_fig2_tau_profile` | Table 4, Figure 5 |
 | `S2_observability_grid`, `S2_observability_table`, `FIG_fig_observability` | Figure 6, Table S12 |
 | `S5_cap_sweep`, `FIG_fig_cap_sweep` | Table S11, Figure S4 |
 | `S_residual_quantiles`, `S_residual_moments`, `FIG_fig_lmm_diagnostics` | Section 3.1, Figure S1 |
@@ -105,7 +108,8 @@ elsa_hba1c/        functions only, one module per section of the paper
   transformer.py        time-aware Transformer (PyTorch)
   cli.py                shared command-line options
 scripts/           entry points (run_all.py and one script per part of the paper)
-tools/             checks used during the analysis (flow counts, work-file check, target counts, refactoring check)
+tools/             checks used during the analysis (flow counts, work-file check, target counts, plausibility range,
+                   refactoring check)
 illustrations/     Figures 1 and 2 (simulated values)
 ```
 
