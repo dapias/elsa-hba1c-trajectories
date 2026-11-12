@@ -1,9 +1,8 @@
-# Observability of personal HbA1c trajectories in ELSA
+# Personal HbA1c trajectories and incident diabetes
 
 Analysis code for
 
-> Tapias D, Donati C, Völter-Mahlknecht S. *Observability of personal HbA1c trajectories: longitudinal dynamics and
-> incident diabetes in the English Longitudinal Study of Ageing.* medRxiv preprint, 2026 (DOI to follow).
+> Tapias D, Donati C, Völter-Mahlknecht S.* Personal HbA1c trajectories and incident diabetes: association, prediction and observability in the English Longitudinal Study of Ageing.* medRxiv preprint, 2026 (DOI to follow).
 
 The code estimates personal HbA1c trajectories from repeated health-visit measurements in the English Longitudinal
 Study of Ageing (ELSA), evaluates their association with incident diabetes and their incremental predictive value
