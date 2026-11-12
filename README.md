@@ -113,14 +113,6 @@ tools/             checks used during the analysis (flow counts, work-file check
 illustrations/     Figures 1 and 2 (simulated values)
 ```
 
-## Code history
-
-The analyses were developed as a single script (first commit, `elsa_hba1c_paper.py` and
-`elsa_hba1c_transformer.py`), which produced the published results. It was then split into the package without
-changing any function: `tools/verify_split.py` compares the abstract syntax tree of every function and setting in
-the package with the original script (`git show <first commit>:elsa_hba1c_paper.py > original.py`), and a full run
-of the package was compared with the output tables of the original run.
-
 ## Citation
 
 See `CITATION.cff`. If you use the code, please cite the paper.
