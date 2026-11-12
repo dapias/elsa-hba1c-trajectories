@@ -12,7 +12,7 @@ drift process, and quantifies how reliably personal slopes can be recovered unde
 
 ## Data
 
-The ELSA data are **not** included and must never be committed to this repository. They are available from the
+The ELSA data are **not** included in this repository. They are available from the
 UK Data Service under an End User Licence (study SN 5050). Place the following `.tab` files in one folder
 (passed as `--data`):
 
